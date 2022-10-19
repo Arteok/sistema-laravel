@@ -15,6 +15,7 @@ class EmpleadosController extends Controller
     public function index()
     {
         //
+        return view('empleados.index');
     }
 
     /**
@@ -25,6 +26,8 @@ class EmpleadosController extends Controller
     public function create()
     {
         //
+        //return view('empleados.create');
+        return view('empleados.create');
     }
 
     /**
@@ -36,6 +39,8 @@ class EmpleadosController extends Controller
     public function store(Request $request)
     {
         //
+        $datosEmpleados = request()->all();
+        return response()->json($datosEmpleados);
     }
 
     /**
@@ -55,9 +60,11 @@ class EmpleadosController extends Controller
      * @param  \App\Models\Empleados  $empleados
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleados $empleados)
+    public function edit()
     {
         //
+        return view('empleados.edit');
+
     }
 
     /**
