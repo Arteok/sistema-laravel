@@ -36,3 +36,4 @@ Route::get('/empleados/form', function () {
 });*/
 
 Route::resource('empleados', EmpleadosController::class);
+Route::get('/empleados', [EmpleadosController::class,'store']);
