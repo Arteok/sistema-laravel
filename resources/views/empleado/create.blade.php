@@ -22,6 +22,6 @@ Sección para crear empleados
     <input type="file" name="foto" id="foto">
     <br>
 
-    <input type="submit" value="Guardar"  ">
+    <input type="submit" value="Guardar">
     <br>
 </form>
