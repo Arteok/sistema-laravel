@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('Nombre' ,10);
-            $table->string('ApellidoPaterno' ,10);
-            $table->string('ApellidoMaterno' ,10);
-            $table->string('Correo');
-            $table->string('Foto');
+            $table->id();
+            $table->string('nombre' ,10);
+            $table->string('apellidoPaterno' ,10);
+            $table->string('apellidoMaterno' ,10);            
+            $table->string('correo');
+            $table->string('foto');
             $table->timestamps();
         });
     }

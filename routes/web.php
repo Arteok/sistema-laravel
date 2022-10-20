@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\EmpleadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,21 +19,14 @@ Route::get('/', function () {
 });
 
 /*
-Route::get('/empleados', function () {
-    return view('empleados.index');
+//1era forma
+Route::get('/empleado', function () {
+    return view('empleado.index');
 });
+//2da forma
+Route::get('empleado/create',[EmpleadoController::class,'create']);
+*/
 
+//3era forma - crea todas las rutas - solo se hace cuando ya este terminado el proyecto
+Route::resource('empleado',EmpleadoController::class);
 
-
-Route::get('/empleados/create', [EmpleadosController::class,'create']);
-
-Route::get('/empleados/edit', function () {
-    return view('empleados.edit');
-});
-
-Route::get('/empleados/form', function () {
-    return view('empleados.form');
-});*/
-
-Route::resource('empleados', EmpleadosController::class);
-Route::get('/empleados', [EmpleadosController::class,'store']);
