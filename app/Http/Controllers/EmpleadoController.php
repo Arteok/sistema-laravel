@@ -15,7 +15,9 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        return view('empleado.index');
+        $datos['empleados'] = Empleado::paginate(5);//busca los 5 primeros registros pra mandarselos al index que lo muestre
+        return view('empleado.index', $datos);  
+        
     }
 
     /**
@@ -39,6 +41,9 @@ class EmpleadoController extends Controller
     {
         //
         $datosEmpleado = request()->except('_token');//carga todo en datosEmpleado menos el token
+        if($request->hasFile('foto')){ //guarda el jpg en la carpeta storage/app/public/uploads
+            $datosEmpleado['foto'] = $request->file('foto')->store('uploads','public');
+        }
         Empleado::insert($datosEmpleado);//inserta en la base de datos
         return response()->json($datosEmpleado);//muestra lo que inserto
     }
@@ -60,9 +65,11 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
         //
+        $empleado=Empleado::findOrFail($id);
+        return view('empleado.edit', compact('empleado'));
     }
 
     /**
@@ -72,9 +79,15 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
         //
+        $datosEmpleado = request()->except(['_token','_method']);//carga todo en datosEmpleado menos el token
+        Empleado::where('id','=',$id)->update($datosEmpleado);
+
+        $empleado=Empleado::findOrFail($id);
+        return view('empleado.edit', compact('empleado'));
+
     }
 
     /**
@@ -83,8 +96,10 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+    public function destroy($id)
     {
         //
+        Empleado::destroy($id);
+        return redirect('empleado');
     }
 }
