@@ -1,4 +1,6 @@
 Inicio(Despliegue de datos)
+<a href="{{ url('empleado/create')}}">Registrar nuevo empleado</a> {{--Para ir a create--}}
+
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
@@ -16,8 +18,8 @@ Inicio(Despliegue de datos)
             <td>{{ $empleado->id }}</td>
 
             <td>
-                <img src="{{ assent('storage').'/'.$empleado->foto }}" alt="Foto de una nube">
-                {{ $empleado->foto}}
+                <img src="{{ asset('storage').'/'.$empleado->foto }}" width="200" alt="Foto de una nube">
+                {{--{{ $empleado->foto}}--}} 
             </td>
 
             <td>{{ $empleado->nombre }}</td>
