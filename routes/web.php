@@ -15,18 +15,23 @@ use App\Http\Controllers\EmpleadoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 /*
 //1era forma
-Route::get('/empleado', function () {
-    return view('empleado.index');
+Route::get('/empleado', function () {return view('empleado.index');
 });
 //2da forma
 Route::get('empleado/create',[EmpleadoController::class,'create']);
 */
-
 //3era forma - crea todas las rutas - solo se hace cuando ya este terminado el proyecto
-Route::resource('empleado',EmpleadoController::class);
+Route::resource('empleado',EmpleadoController::class); //crear todas las rutas de empleado controller
 
+Auth::routes();
+
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+Route::group(['middleware'=> 'auth'], function(){    
+    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+});
