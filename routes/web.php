@@ -26,9 +26,9 @@ Route::get('/empleado', function () {return view('empleado.index');
 Route::get('empleado/create',[EmpleadoController::class,'create']);
 */
 //3era forma - crea todas las rutas - solo se hace cuando ya este terminado el proyecto
-Route::resource('empleado',EmpleadoController::class); //crear todas las rutas de empleado controller
-
-Auth::routes();
+//crear todas las rutas de empleado controller
+Route::resource('empleado',EmpleadoController::class)->middleware('auth'); 
+Auth::routes(['register'=>false, 'reset'=>false]);
 
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
 
