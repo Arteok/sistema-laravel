@@ -3,12 +3,16 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-
-    {{--codigo para recepcionar los mensajes--}}
-    @if (Session::has('mensaje'))
-        {{Session::get('mensaje')}}
-    @endif
-
+    
+          {{--codigo para recepcionar los mensajes--}}
+        @if (Session::has('mensaje'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                {{Session::get('mensaje')}}
+                {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">    
+                    <span aria-hidden="true">&times;</span>
+                </button> no funciona--}} 
+            </div>  
+        @endif  
     <a href="{{ url('empleado/create')}}" class="btn btn-success">Registrar nuevo empleado</a> {{--Para ir a create--}}
     <br>
     <br>
@@ -55,5 +59,6 @@
             @endforeach
         </tbody>
     </table>
+    {!! $empleados->links() !!}
 </div>
 @endsection
